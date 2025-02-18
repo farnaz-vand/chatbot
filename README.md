@@ -76,7 +76,7 @@ Setup Instructions (Yarn)
 
     Clone the Repository:
 
-git clone https://github.com/your-repository-url.git
+git clone https://github.com/farnaz-vand/chatbot.git
 
 Install Dependencies:
 
