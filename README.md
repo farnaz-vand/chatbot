@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+Image Upload and Display in Chatbot - Implementation Documentation
+Introduction
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+In this project, the goal was to add the ability to upload and display images in a React and DevExtreme-based chatbot. Previously, the chatbot could only send text messages and used OpenAI Azure for processing the messages.
 
-## Available Scripts
+The goal of this implementation was to:
 
-In the project directory, you can run:
+    Allow users to upload and send images in the chat.
+    Display images in the chat without processing them by AI.
+    Apply limitations on the image file size and format.
 
-### `npm start`
+Features Implemented
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    Image Upload Capability:
+        Users can select and send image files in JPEG, PNG, and GIF formats.
+        After selecting an image, a preview of the image is shown in the chat to confirm the user's selection.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+    Handling Text and Image Messages:
+        Text messages are sent to OpenAI for processing, and a response is received.
+        Image messages are displayed in the chat, and no AI response is given. Instead, the message "AI cannot process images" is displayed to the user.
 
-### `npm test`
+    Data Optimization and Management:
+        Images are stored temporarily in the state, and there is no need to upload them to the server. This helps maintain chat speed and performance.
+        Text message sending and receiving functionality remain unchanged.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    UI/UX Improvements:
+        Images are displayed in the chat appropriately.
+        The image size is controlled, and files larger than 5 MB are not accepted.
+        An error message is shown if the selected file is not an image or has an invalid format.
 
-### `npm run build`
+    Managing User’s Online Status:
+        If the user is offline, a message is shown to inform the user about the lack of internet connection before sending any image or text message.
+        The message shown: "You are not connected to the internet. Please check your connection."
+        This message disappears when the user connects to the internet, and message sending becomes available again.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Expected Test Scenarios and Results
+Scenario 1: Successful Image Upload
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    Step 1: The user selects an image (JPEG, PNG, GIF format).
+    Step 2: The selected image is displayed correctly in the chat.
+    Step 3: The message "AI cannot process images" is shown in response to the uploaded image.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Scenario 2: Sending a Text Message
 
-### `npm run eject`
+    Step 1: The user sends a text message.
+    Step 2: The message is sent to OpenAI, and a response is received.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Scenario 3: Sending a Non-Image File
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    Step 1: The user selects a non-image file (e.g., PDF or text file).
+    Step 2: The system displays the error message: "The selected file is not an image," and prevents the file from being sent.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Scenario 4: Sending a Large Image
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+    Step 1: The user selects an image file larger than 5 MB.
+    Step 2: The system displays the error message: "The file size exceeds the allowed limit."
 
-## Learn More
+Technologies and Tools Used
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    React for building components and managing the state.
+    DevExtreme for using the chat widget and displaying messages.
+    OpenAI Azure for processing text messages and providing responses.
+    JavaScript for managing file selection, showing previews, and handling errors.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Challenges and Solutions
 
-### Code Splitting
+    Challenge with Image Format and Size: Since there was a need to limit the image size, the system had to ensure that selected files were smaller than 5 MB. This was done by checking the file properties.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    Memory Management: Images were temporarily stored in memory and did not need to be sent to the server. This ensured faster and more efficient processing.
 
-### Analyzing the Bundle Size
+Conclusion
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This project successfully implemented the ability to upload and display images in the chatbot. Since AI does not process images, only a confirmation message is displayed, and the images are shown in the chat. By applying file format and size restrictions, the user experience was optimized.
 
-### Making a Progressive Web App
+Setup Instructions (Yarn)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+    Clone the Repository:
 
-### Advanced Configuration
+git clone https://github.com/your-repository-url.git
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Install Dependencies:
 
-### Deployment
+Navigate to the project folder and run the following command to install the required dependencies using Yarn:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+yarn install
 
-### `npm run build` fails to minify
+Start the Application:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Once the dependencies are installed, start the application using the command:
+
+yarn start
